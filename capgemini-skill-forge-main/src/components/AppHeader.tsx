@@ -1,3 +1,14 @@
+/**
+ * Application Header Component
+ * 
+ * Global navigation header displayed on all protected pages.
+ * Contains:
+ * - Logo and brand name
+ * - Navigation links (Activities, Dashboard, Admin if role permits)
+ * - Current user email display
+ * - Sign out button
+ */
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";

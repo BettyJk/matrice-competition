@@ -1,3 +1,16 @@
+/**
+ * Authentication Hook and Context
+ * 
+ * Provides global authentication state management using React Context.
+ * Handles:
+ * - User session persistence across page reloads
+ * - Admin role checking via Supabase RPC
+ * - Sign in/up/out operations with email validation
+ * - Real-time auth state listeners
+ * 
+ * Usage: const { user, isAdmin, signIn, signOut } = useAuth();
+ */
+
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";

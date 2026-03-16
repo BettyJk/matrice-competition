@@ -1,3 +1,13 @@
+/**
+ * Login Page Component
+ * 
+ * Handles user authentication with two tabs:
+ * 1. Login - For existing users to sign in with email/password
+ * 2. Signup - For new users to create an account
+ * 
+ * Redirects authenticated users to the activity selection page.
+ */
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";

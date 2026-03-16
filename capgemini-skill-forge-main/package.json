@@ -1,7 +1,12 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "capgemini-skill-forge",
+  "description": "Competency Matrix Management Platform for Capgemini - Track and manage employee skills and development paths",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BettyJk/matrice-competition.git"
+  },
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -79,7 +84,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^15.15.0",
     "jsdom": "^20.0.3",
-    "lovable-tagger": "^1.1.13",
+
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",

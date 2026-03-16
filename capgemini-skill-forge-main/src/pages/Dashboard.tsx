@@ -1,3 +1,15 @@
+/**
+ * User Dashboard Page
+ * 
+ * Displays personal competency statistics and analytics:
+ * - Total competencies tracked
+ * - Completed vs In-Progress items
+ * - Visual charts showing competency distribution by priority
+ * - Recent activity data
+ * 
+ * Data is fetched from Supabase in real-time on component mount.
+ */
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";

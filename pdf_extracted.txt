@@ -1,0 +1,211 @@
+=== PDF1: c:\Users\jbouthay\Downloads\capgemini-skill-forge-main\PFE_MG2 (1).pdf ===
+Pages: 4
+--- Page 1 ---
+Step-by-Step Description of the Project Process
+Jouak Bouthayna
+Introduction
+This report explains, in very simple and detailed steps, what I am going to do during my project. The goal
+of the project is to create an intelligent system that helps engineers do benchmarking and implantation work
+automatically. Today, engineers do many tasks manually in CATIA. My project will automate these tasks
+using Artificial Intelligence.
+I describe below every step of the process, from the beginning until the end, in the simplest possible way.
+Step 1: Understanding the Work of Engineers
+•First, I learn what mechanical engineers do in benchmarking.
+•I look at their screenshots, their reports, and how they work.
+•I understand how they check distances, collisions, packaging limits, cable routing, and design con-
+straints.
+•I also learn what the implantation team does: they check if a component fits inside the car environment.
+Step 2: Collecting the Input Files
+•Engineers give STL files. An STL file is a 3D mesh of a part.
+•These STL files are the only input the AI system needs.
+•I collect these STL files and store them in a clean folder.
+•I also collect packaging rules (like minimum distance rules).
+Step 3: Preparing the STL Files
+•I load each STL file in Python.
+•I clean the mesh (remove noise, fix shape problems).
+•I convert the mesh into a point cloud, because AI models understand point clouds better.
+•I normalize the shape so all parts have a similar scale.
+1
+--- Page 2 ---
+Step 4: Training the Machine Learning Model
+•I train a 3D machine learning model, like PointNet or MeshCNN.
+•This model learns to understand the 3D geometry of the part.
+•It learns to read the shape and produce measurements like:
+–distances,
+–clearances,
+–collisions,
+–areas of risk (critical zones).
+•This replaces the manual measurements engineers do in CATIA.
+Step 5: Extracting All Measurements Automatically
+•I run the trained model on each new STL file.
+•The model outputs all measurements automatically.
+•These measurements will be used later for analysis.
+Step 6: Applying Packaging Rules
+•I load the rules used by engineers, such as:
+–minimum distance between parts,
+–minimum clearance for cables,
+–alignment constraints,
+–allowed space zones.
+•I apply these rules to the measurements extracted by the model.
+•This allows the system to detectpoints dursautomatically.
+Step 7: Detecting Points Durs
+•The system checks every measurement.
+•If a rule is broken, the system marks apoint dur.
+•Examples of points durs:
+–two parts are too close,
+–a cable routing is impossible,
+–a connector is not aligned,
+–a component collides with another.
+2
+--- Page 3 ---
+Step 8: Generating Implantation Scenarios
+•When the design has problems, the system generates scenarios.
+•A scenario is a new possible way to place the component.
+•The AI tries simple modifications like:
+–moving the part a few millimeters,
+–rotating the part,
+–changing cable routing,
+–testing alternative orientations.
+•For each scenario, the AI checks if it respects the rules.
+Step 9: Evaluating All Scenarios
+•Each scenario is tested with packaging rules.
+•The AI marks each one as:
+–OK (scenario is good),
+–NOK (scenario still has problems).
+•The AI also gives a score for each scenario.
+Step 10: Using the RAG Agent for Reasoning
+•The RAG agent (Retrieval-Augmented Generation) is used here.
+•It reads all the measurements and scenario results.
+•It reads the packaging rules again.
+•It explains clearly:
+–why the design is OK or NOK,
+–why a scenario works or does not work,
+–what the best scenario is,
+–what the engineering justification is.
+Step 11: Proposing Solutions Automatically
+•When the design is NOK, the AI proposes solutions.
+•Solutions can be:
+–move the part,
+3
+--- Page 4 ---
+–rotate the part,
+–change cable direction,
+–increase a clearance,
+–modify the connector angle.
+•These solutions are very similar to what engineers do manually.
+Step 12: Generating the Final Report Automatically
+•The system gathers everything:
+–measurements,
+–points durs,
+–scenarios,
+–OK/NOK results,
+–proposed solutions,
+–explanations from the RAG agent.
+•It creates a final report.
+•The report looks like the ones engineers create manually.
+•The report is clear, structured and ready to use.
+Conclusion
+This project builds a complete intelligent system that can read 3D parts, analyze them, detect problems,
+generate solutions, create scenarios and produce a full report. It replaces many manual tasks that mechanical
+engineers do today.
+4
+
+=== PDF2: c:\Users\jbouthay\Downloads\capgemini-skill-forge-main\PFE_MG2 2.pdf ===
+Pages: 3
+--- Page 1 ---
+Automatisation Intelligente du Benchmarking et de l’Implantation
+Sous CATIA
+Jouak Bouthayna
+1 Introduction
+Ce projet vise ` a d´ evelopper un assistant intelligent capable d’automatiser une grande partie du processus de
+benchmarking r´ ealis´ e actuellement de mani` ere manuelle dans CATIA. Aujourd’hui, les ing´ enieurs doivent :
+•importer les fichiers STL,
+•mesurer les distances et d´ egagements,
+•identifier les zones critiques,
+•d´ ecider si le design est conforme ou non,
+•r´ ediger un rapport.
+Le but du projet est de remplacer ces ´ etapes manuelles par un syst` eme d’intelligence artificielle.
+2 Objectifs du Projet
+Le projet comporte deux volets principaux :
+1.Mod` ele IA entraˆ ın´ e sur des fichiers STLCapable d’extraire automatiquement les mesures n´ ecessaires
+(distances, d´ egagements, limites de conception).
+2.Agent RAG (Retrieval-Augmented Generation)Capable d’interpr´ eter les mesures, de d´ ecider
+si le design est OK ou NOK, et de g´ en´ erer des actions ou recommandations.
+[
+3 Architecture G´ en´ erale du Syst` eme
+L’architecture globale peut ˆ etre r´ esum´ ee par le diagramme ci-dessous :
+[STL Input]
+↓
+ML Extraction (Distances, D´ egagements)
+↓
+RAG Decision (OK / NOK)
+↓
+Actions & Rapport Automatique
+1
+--- Page 2 ---
+4 Description des Modules
+4.1 Mod` ele IA pour la g´ eom´ etrie STL
+Le mod` ele IA apprend ` a comprendre la g´ eom´ etrie d’une pi` ece 3D. Il peut :
+•lire un maillage STL,
+•identifier les zones importantes,
+•mesurer des distances automatiquement,
+•reproduire le travail fait dans CATIA.
+4.2 Agent RAG pour la d´ ecision
+L’agent RAG utilise les mesures fournies par le mod` ele IA. Il :
+•compare les valeurs avec les normes ergonomiques ou internes,
+•d´ etermine si le design est conforme,
+•g´ en` ere des recommandations,
+•produit un rapport complet.
+5 Flux de Fonctionnement
+Le fonctionnement complet peut ˆ etre r´ esum´ e par :
+STL Input→ML Extraction (Distances, D´ egagements)→RAG Decision (OK/NOK)→Actions & Rapport Automatique
+6 Extension Fonctionnelle : Module d’Implantation
+Afin de r´ epondre au besoin exprim´ e par l’´ equipe d’implantation lors de la r´ eunion et aux analyses observ´ ees
+sur les captures d’´ ecran, le projet est ´ etendu pour int´ egrer la dimension implantation physique des com-
+posants dans l’environnement moteur.
+D´ etection automatique des points durs (Packaging Requirements)
+Le mod` ele IA doit maintenant d´ etecter les points durs issus des r` egles de packaging :
+•collisions avec d’autres composants,
+•impossibilit´ e de routage,
+•interfaces m´ ecaniques mal align´ ees,
+•d´ egagements insuffisants,
+•conflits avec cˆ ables haute/basse tension.
+Ces points durs correspondent exactement aux probl` emes identifi´ es par les ing´ enieurs dans les slides
+d’implantation : interf´ erences, mauvais alignement, connecteurs non conformes.
+2
+--- Page 3 ---
+G´ en´ eration de sc´ enarios d’implantation
+Le syst` eme g´ en` ere automatiquement plusieurs variantes d’implantation, telles que :
+•d´ eplacement du boˆ ıtier ou du support,
+•rotation d’un organe ou d’un connecteur,
+•reroutage alternatif de cˆ ables,
+•ajustements g´ eom´ etriques simples.
+Chaque sc´ enario est ensuite ´ evalu´ e en termes de :
+•faisabilit´ e (OK/NOK),
+•r´ eduction des points durs,
+•respect des packaging requirements,
+•compatibilit´ e avec les autres environnements.
+Proposition automatique de solutions
+En cas de design NOK, l’assistant IA g´ en` ere :
+•repositionnement optimal,
+•ajustement de connecteurs,
+•nouvelle trajectoire de cˆ ables,
+•recommandations g´ eom´ etriques,
+•justification technique.
+Ces recommandations refl` etent exactement le travail r´ ealis´ e par l’´ equipe d’implantation dans les pr´ esentations
+: adapter la position du sensor box, changer un routage, etc.
+G´ en´ eration automatique du rapport d’implantation
+L’outil produit un rapport complet regroupant :
+•distances et d´ egagements extraits automatiquement,
+•analyse OK/NOK,
+•points durs d´ etect´ es,
+•sc´ enarios g´ en´ er´ es,
+•recommandations propos´ ees par l’IA,
+•images synth´ etiques ou captures 3D annot´ ees.
+Ce rapport remplace le travail manuel actuellement fait sous PowerPoint par l’´ equipe d’implantation.
+7 Conclusion
+Ce projet permettra de r´ eduire consid´ erablement le temps pass´ e sur le benchmarking et les mesures g´ eom´ etriques
+dans CATIA. L’extension vers l’implantation offre un assistant capable d’analyser, comparer et proposer des
+solutions compl` etes, g´ en´ erant automatiquement des rapports d’implantation et de benchmarking.
+3
+
