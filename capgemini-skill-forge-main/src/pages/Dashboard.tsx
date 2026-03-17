@@ -17,8 +17,10 @@ import { useAuth } from "@/hooks/useAuth";
 import { AppHeader } from "@/components/AppHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { ClipboardCheck, Clock, CheckCircle } from "lucide-react";
+import { ClipboardCheck, Clock, CheckCircle, RefreshCw } from "lucide-react";
+import { ImportMatrixDialog } from "@/components/ImportMatrixDialog";
 
 
 const Dashboard = () => {
@@ -26,19 +28,27 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [entries, setEntries] = useState<any[]>([]);
   const [activities, setActivities] = useState<any[]>([]);
+  const [reloading, setReloading] = useState(false);
+
+  const loadData = async () => {
+    if (!user) return;
+    const [{ data: e }, { data: a }] = await Promise.all([
+      supabase.from("matrix_entries").select("*").eq("user_id", user.id),
+      supabase.from("activities").select("*"),
+    ]);
+    setEntries(e || []);
+    setActivities(a || []);
+  };
 
   useEffect(() => {
-    if (!user) return;
-    const load = async () => {
-      const [{ data: e }, { data: a }] = await Promise.all([
-        supabase.from("matrix_entries").select("*").eq("user_id", user.id),
-        supabase.from("activities").select("*"),
-      ]);
-      setEntries(e || []);
-      setActivities(a || []);
-    };
-    load();
+    loadData();
   }, [user]);
+
+  const handleReload = async () => {
+    setReloading(true);
+    await loadData();
+    setReloading(false);
+  };
 
   const getActivityName = (id: string) => activities.find((a) => a.id === id)?.name || id;
 
@@ -56,7 +66,26 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       <AppHeader />
       <main className="container mx-auto py-8 px-4">
-        <h1 className="text-2xl font-display font-bold text-foreground mb-6">Mon Dashboard</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-display font-bold text-foreground">Mon Dashboard</h1>
+          <div className="flex gap-2">
+            {user && (
+              <ImportMatrixDialog
+                userId={user.id}
+                activities={activities}
+                onImportComplete={handleReload}
+              />
+            )}
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleReload}
+              disabled={reloading}
+            >
+              <RefreshCw className={`w-4 h-4 ${reloading ? "animate-spin" : ""}`} />
+            </Button>
+          </div>
+        </div>
 
         {/* Stats cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
